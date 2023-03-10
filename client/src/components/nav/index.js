@@ -1,6 +1,6 @@
 export default function Nav() {
     const [showNavSecond, setShowNavSecond] = useState(false);
-  
+  // function 
     function showNavigation() {
       if (Auth.loggedIn()) {
         return (
