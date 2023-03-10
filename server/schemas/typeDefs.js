@@ -1,10 +1,33 @@
 const { gql } = require('apollo-server-express');
 
-
-//this is a basic example in order to test the server. Remove when adding actual code.
 const typeDefs = gql`
-  type Query {
-    hello: String
+  type Category {
+    _id: ID!
+    attribute: String!
+  }
+
+  type Prduct {
+    _id: ID!
+    name: String!
+    description: String
+    price: Number!
+    quantity: Number
+    catagories: [Category]
+  }
+
+  type Order {
+    _id: ID!
+    purchaseDate: Date
+    products: [Product]
+  }
+
+  type User {
+   _id: ID!
+   firstName: String!
+   lastName: String!
+   email: String!
+   password: String! 
+   orders: [Order]
   }
 `;
 
