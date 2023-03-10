@@ -14,7 +14,7 @@ import {
 // this is to prevent errors. We will need to add logic to the Nav for login
 //true represents a logged in user
 // false is logged out.
-const auth = true
+const auth = false
 
 export default function Nav() {
     const [showNavSecond, setShowNavSecond] = useState(false);
