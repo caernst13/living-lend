@@ -3,12 +3,12 @@ import {MDBContainer, MDBCol, MDBRow, MDBBtn, MDBIcon, MDBInput, MDBCheckbox } f
 
 export default function Login() {    
           return (
-            <MDBContainer fluid className="p-3 my-5 h-custom">
+            <MDBContainer fluid className="p-3 my-5 h-custom" >
         
               <MDBRow>
         
                 <MDBCol col='10' md='6'>
-                  <img src="https://source.unsplash.com/AAy5l4-oFuw" className="img-fluid rounded mb-3 shadow" alt="Sample image" />
+                  <img src="https://source.unsplash.com/AAy5l4-oFuw" className="img-fluid rounded mb-3 shadow" alt="Dining Room" />
                 </MDBCol>
         
                 <MDBCol col='4' md='6' className = "d-flex flex-column align-items-center justify-content-center">
