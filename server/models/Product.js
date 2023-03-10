@@ -21,11 +21,14 @@ const productSchema = new Schema({
         min: 0,
         default: 0
     },
-    catagories: [
-        Category.schema
+    categories: [
+        {
+            type: Schema.Types.ObjectId,
+            ref: 'Category'
+          }
     ]
 });
 
-const Product = mongoose.model('Order', productSchema);
+const Product = mongoose.model('Product', productSchema);
 
 module.exports = Product;
