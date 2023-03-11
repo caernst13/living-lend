@@ -8,6 +8,18 @@ import Auth from '../../utils/auth';
 import { useStoreContext } from '../../utils/GlobalState';
 import { TOGGLE_CART, ADD_MULTIPLE_TO_CART } from '../../utils/actions';
 import './style.css';
+import {
+  MDBBtn,
+  MDBCard,
+  MDBCardBody,
+  MDBCardImage,
+  MDBCol,
+  MDBContainer,
+  MDBIcon,
+  MDBInput,
+  MDBRow,
+  MDBTypography,
+} from "mdb-react-ui-kit";
 
 const stripePromise = loadStripe('pk_test_TYooMQauvdEDq54NiTphI7jx');
 
@@ -68,39 +80,63 @@ const Cart = () => {
   }
     
 
-
   return (
-    <div className="cart">
-      <div className="close" onClick={toggleCart}>
-        X
-      </div>
-      <h2>Shopping Cart</h2>
-      {state.cart.length ? (
-        <div>
-          {state.cart.map((item) => (
-            <CartItem key={item._id} item={item} />
-          ))}
+    <section  className="cart h-100 h-custom" style={{ backgroundColor: "#eee" }}>
+      <MDBContainer className="h-100 py-5">
+        <MDBRow className="justify-content-center align-items-center h-100">
+          <MDBCol>
+            <MDBCard className="shopping-cart" style={{ borderRadius: "15px" }}>
+              <MDBCardBody className="text-black">
+                <MDBRow>
+                  <MDBCol lg="14" className="px-5 py-4">
+                    <MDBTypography
+                      tag="h3"
+                      className="mb-5 pt-2 text-center fw-bold text-uppercase"
+                    >
+                      Your Cart
+                    </MDBTypography>
+                    {state.cart.map((item) => (
+                    <CartItem key={item._id} item={item} />
+                    ))}
 
-          <div className="flex-row space-between">
-            <strong>Total: ${calculateTotal()}</strong>
 
-            {Auth.loggedIn() ? (
-              <button onClick={submitCheckout}>Checkout</button>
-            ) : (
-              <span>(log in to check out)</span>
-            )}
-          </div>
-        </div>
-      ) : (
-        <h3>
-          <span role="img" aria-label="shocked">
-            😱
-          </span>
-          You haven't added anything to your cart yet!
-        </h3>
-      )}
-    </div>
+                    <hr
+                      className="mb-4"
+                      style={{
+                        height: "2px",
+                        backgroundColor: "#1266f1",
+                        opacity: 1,
+                      }}
+                    />
+                    <div
+                      className="d-flex justify-content-between p-2 mb-2"
+                      style={{ backgroundColor: "#e1f5fe" }}
+                    >
+                      <MDBTypography tag="h5" className="fw-bold mb-0">
+                        Total:
+                      </MDBTypography>
+                      <MDBTypography tag="h5" className="fw-bold mb-0">
+                        ${calculateTotal()}
+                      </MDBTypography>
+                    </div>
+                  </MDBCol>
+                    {Auth.loggedIn() ? (
+                      <MDBBtn color = "warning" onClick={submitCheckout}>Checkout</MDBBtn>
+                    ) : (
+                      <span>(log in to check out)</span>
+                    )} 
+                        <a href="">
+                          <MDBIcon onClick={toggleCart} fas icon="angle-left me-2" />
+                          Back to shopping
+                        </a>
+                </MDBRow>
+              </MDBCardBody>
+            </MDBCard>
+          </MDBCol>
+        </MDBRow>
+      </MDBContainer>
+    </section>
   );
-};
+}
 
 export default Cart;

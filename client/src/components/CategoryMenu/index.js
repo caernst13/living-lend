@@ -45,7 +45,8 @@ export default function CategoryMenu() {
 
   };
   return (
-    <div>
+    <div className="text-center">
+      <span>Filter By:</span>
     {categories.map((item) => (
       <MDBBtn className = "m-2"color='light'
         key={item._id}

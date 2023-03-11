@@ -2,6 +2,18 @@ import React from 'react';
 import { useStoreContext } from "../../utils/GlobalState";
 import { REMOVE_FROM_CART, UPDATE_CART_QUANTITY } from "../../utils/actions";
 import { idbPromise } from "../../utils/helpers";
+import {
+  MDBBtn,
+  MDBCard,
+  MDBCardBody,
+  MDBCardImage,
+  MDBCol,
+  MDBContainer,
+  MDBIcon,
+  MDBInput,
+  MDBRow,
+  MDBTypography,
+} from "mdb-react-ui-kit";
 
 const CartItem = ({ item }) => {
 
@@ -37,33 +49,34 @@ const CartItem = ({ item }) => {
   }
 
   return (
-    <div className="flex-row">
-      <div>
-        <img
-          src={`/images/${item.image}`}
-          alt=""
-        />
-      </div>
-      <div>
-        <div>{item.name}, ${item.price}</div>
-        <div>
-          <span>Qty:</span>
-          <input
-            type="number"
-            placeholder="1"
-            value={item.purchaseQuantity}
-            onChange={onChange}
-          />
-          <span
-            role="img"
-            aria-label="trash"
-            onClick={() => removeFromCart(item)}
-          >
-            🗑️
-          </span>
-        </div>
-      </div>
-    </div>
+    <div key={item._id} className="d-flex align-items-center mb-5">
+                      <div className="flex-shrink-0">
+                        <MDBCardImage
+                          src={`${item.image}`}
+                          fluid
+                          style={{ width: "100px" }}
+                          alt="Generic placeholder image"
+                        />
+                      </div>
+
+                      <div className="flex-grow-1 ms-3">
+                      <a href="#!" className="float-end text-black" onClick={() => removeFromCart(item)}>
+                      <MDBIcon fas icon="times" />
+                      </a>
+                        <MDBTypography tag="h5" className="text-primary">
+                        {item.name}
+                        </MDBTypography>
+
+
+                        <div className="d-flex align-items-center">
+                          <p className="fw-bold mb-0 me-5 pe-3">${item.price}</p>
+
+                          <div className="d-flex align-items-center">
+                            <p className="quantity fw-bold text-black">Qty: { item.purchaseQuantity}</p>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
   );
 }
 
