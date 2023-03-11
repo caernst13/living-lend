@@ -14,7 +14,6 @@ function ProductList() {
 
   const { loading, data } = useQuery(QUERY_PRODUCTS);
 
-  console.log(currentCategory)
 
   useEffect(() => {
     if (data) {
@@ -38,7 +37,7 @@ function ProductList() {
 
   function filterProducts() {
     if (!currentCategory) {
-      console.log(state.products)
+    
       return state.products;
     }
 

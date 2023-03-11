@@ -18,8 +18,7 @@ import {
 import "./ecommerce-category-product.css";
 
 function ProductItem(item) {
-  console.log(item
-)
+
   const [state, dispatch] = useStoreContext();
 
   const {
@@ -56,6 +55,7 @@ function ProductItem(item) {
 
   return (
     <MDBContainer fluid>
+      
      <MDBRow className="justify-content-center mb-3">
   <MDBCol md="12" xl="10">
     <MDBCard className="shadow-0 border rounded-3">
@@ -72,7 +72,7 @@ function ProductItem(item) {
                 fluid
                 className="w-100"
               />
-              <a href="#!">
+              <a href={`/products/${_id}`}>
                 <div
                   className="mask"
                   style={{ backgroundColor: "rgba(251, 251, 251, 0.15)" }}
@@ -96,7 +96,7 @@ function ProductItem(item) {
               <span>100% cotton</span>
               <span className="text-primary"> • </span>
               <span>Light weight</span>
-              <span classNAme="text-primary"> • </span>
+              <span className="text-primary"> • </span>
               <span>
                 Best finish
                 <br />
@@ -123,16 +123,16 @@ function ProductItem(item) {
             <div className="d-flex flex-row align-items-center mb-1">
                     <h4 className="mb-1 me-1">${price}</h4>
               <span className="text-danger">
-                <s>$21.99</s>
+                <s></s>
               </span>
             </div>
                   <h6 className="text-success">{quantity} {pluralize("item", quantity)} in stock</h6>
             <div className="d-flex flex-column mt-4">
-              <MDBBtn color="primary" size="sm">
+              <MDBBtn color="light" size="sm" href={`/products/${_id}`}>
                 Details
               </MDBBtn>
-              <MDBBtn outline color="primary" size="sm" className="mt-2">
-                Add to wish list
+                    <MDBBtn onClick={addToCart} color="dark" size="sm" className="mt-2">
+                Add to Cart
               </MDBBtn>
             </div>
           </MDBCol>

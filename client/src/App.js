@@ -7,6 +7,7 @@ import OrderHistory from "./pages/OrderHistory"
 import Login from "./pages/Login"
 import Signup from "./pages/Signup"
 import NotFound from "./pages/NotFound"
+import Detail from './pages/Detail';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import {
   ApolloClient,
@@ -63,6 +64,10 @@ function App() {
               path="/Signup" 
               element={<Signup />} 
             />
+            <Route 
+                path="/products/:id" 
+                element={<Detail />} 
+              />
             <Route 
               path="*" 
               element={<NotFound />} 

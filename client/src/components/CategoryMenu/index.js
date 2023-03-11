@@ -37,16 +37,16 @@ export default function CategoryMenu() {
   }, [categoryData, loading, dispatch]);
 
   const handleClick = (id) => {
-    console.log(`Clicked on category with id: ${id}`);
+
     dispatch({
       type: UPDATE_CURRENT_CATEGORY,
       currentCategory: id,
     });
-    console.log(state);
+
   };
   return (
     <div>
-    <h2>Choose a Category:</h2>
+    <h2>Choose a Room</h2>
     {categories.map((item) => (
       <MDBBtn color='dark'
         key={item._id}

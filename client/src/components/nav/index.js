@@ -45,7 +45,7 @@ export default function Nav() {
                   <MDBNavbarLink href='/orderhistory'>Order History</MDBNavbarLink>
                   <MDBNavbarLink href='/login' onClick={handleLogout}>Logout</MDBNavbarLink>
                   <MDBNavbarItem >
-                    <MDBNavbarLink href='#cart'>
+                    <MDBNavbarLink href='/cart'>
                       <MDBBadge pill color='danger'>0</MDBBadge>
                       <span >
                         <MDBIcon fas icon='shopping-cart'></MDBIcon>
