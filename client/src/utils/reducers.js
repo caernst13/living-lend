@@ -8,6 +8,7 @@ import {
   UPDATE_CATEGORIES,
   UPDATE_CURRENT_CATEGORY,
   CLEAR_CART,
+  UPDATE_CART_COUNT,
   TOGGLE_CART
 } from "./actions";
 
@@ -43,6 +44,11 @@ export const reducer = (state, action) => {
           return product
         })
       };
+      case UPDATE_CART_COUNT:
+        return {
+          ...state,
+          cartCount: action.count,
+        };
 
     case REMOVE_FROM_CART:
       let newState = state.cart.filter(product => {

@@ -13,6 +13,9 @@ import {
 } from 'mdb-react-ui-kit';
 //importing auth. Display a different nav bar if user is logged in.
 import Auth from "../../utils/auth";
+import Cart from '../Cart';
+import { useStoreContext } from '../../utils/GlobalState';
+import { TOGGLE_CART, ADD_MULTIPLE_TO_CART, UPDATE_CART_COUNT } from '../../utils/actions';
 
 //Logic to log the user out when clicked on the nav bar
 const handleLogout = () => {
@@ -21,6 +24,18 @@ const handleLogout = () => {
 
 export default function Nav() {
   
+  const [state, dispatch] = useStoreContext();
+  function toggleCart() {
+    dispatch({ type: TOGGLE_CART });
+  }
+
+  function calculateItems() { 
+    let totalItems = 0;
+    state.cart.forEach(item => {
+      totalItems += item.purchaseQuantity;
+    });
+    return totalItems;
+  }
     const [showNavSecond, setShowNavSecond] = useState(false);
   // function to show nav based on user being logged in or not
     function showNavigation() {
@@ -45,10 +60,10 @@ export default function Nav() {
                   <MDBNavbarLink href='/orderhistory'>Order History</MDBNavbarLink>
                   <MDBNavbarLink href='/login' onClick={handleLogout}>Logout</MDBNavbarLink>
                   <MDBNavbarItem >
-                    <MDBNavbarLink href='/cart'>
-                      <MDBBadge pill color='danger'>0</MDBBadge>
+                    <MDBNavbarLink onClick={toggleCart}>
+                      <MDBBadge pill color='danger'>{calculateItems()}</MDBBadge>
                       <span >
-                        <MDBIcon fas icon='shopping-cart'></MDBIcon>
+                        <MDBIcon  fas icon='shopping-cart'></MDBIcon>
                       </span>
                     </MDBNavbarLink>
                   </MDBNavbarItem>
