@@ -14,6 +14,11 @@ import {
 //importing auth. Display a different nav bar if user is logged in.
 import Auth from "../../utils/auth";
 
+//Logic to log the user out when clicked on the nav bar
+const handleLogout = () => {
+  Auth.logout();
+};
+
 export default function Nav() {
   
     const [showNavSecond, setShowNavSecond] = useState(false);
@@ -38,7 +43,7 @@ export default function Nav() {
                   </MDBNavbarLink>
                   <MDBNavbarLink href='/products'>Products</MDBNavbarLink>
                   <MDBNavbarLink href='/orderhistory'>Order History</MDBNavbarLink>
-                  <MDBNavbarLink href='/logout'>Logout</MDBNavbarLink>
+                  <MDBNavbarLink href='/login' onClick={handleLogout}>Logout</MDBNavbarLink>
                   <MDBNavbarItem >
                     <MDBNavbarLink href='#cart'>
                       <MDBBadge pill color='danger'>0</MDBBadge>
