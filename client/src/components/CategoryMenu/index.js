@@ -1,6 +1,5 @@
 import React, { useEffect } from 'react';
-import { Navigation } from 'react-minimal-side-navigation';
-import 'react-minimal-side-navigation/lib/ReactMinimalSideNavigation.css';
+import {MDBBtn} from 'mdb-react-ui-kit';
 import { useQuery } from '@apollo/client';
 import { useStoreContext } from '../../utils/GlobalState';
 import {
@@ -38,57 +37,26 @@ export default function CategoryMenu() {
   }, [categoryData, loading, dispatch]);
 
   const handleClick = (id) => {
+    console.log(`Clicked on category with id: ${id}`);
     dispatch({
       type: UPDATE_CURRENT_CATEGORY,
       currentCategory: id,
     });
+    console.log(state);
   };
   return (
-    <>
-      <Navigation
-        activeItemId="/management/members"
-        onSelect={({ itemId }) => {}}
-        items={[
-          {
-            title: 'Filters',
-            itemId: '/filter',
-            elemBefore: () => <i className="fa-solid fa-filter"></i>,
-          },
-          {
-            title: 'Room',
-            itemId: '/Room',
-            elemBefore: () => <i className="fa-solid fa-house"></i>,
-            subNav: [
-              {
-                title: 'LivingRoom',
-                itemId: '/room/livingroom',
-              },
-              {
-                title: 'Bedroom',
-                itemId: '/room/bedroom',
-              },
-              {
-                title: 'Dining',
-                itemId: '/room/diningroom',
-              },
-            ],
-          },
-          {
-            title: 'Category',
-            itemId: '/category',
-            elemBefore: () => <i className="fa-solid fa-couch"></i>,
-            subNav: categories
-              ? categories.map((category) => ({
-                  title: category.name,
-                  itemId: `/category/${category._id}`,
-                  onClick: () => {
-                    handleClick(category._id);
-                  },
-                }))
-              : [],
-          },
-        ]}
-      />
-    </>
+    <div>
+    <h2>Choose a Category:</h2>
+    {categories.map((item) => (
+      <MDBBtn color='dark'
+        key={item._id}
+        onClick={() => {
+          handleClick(item._id);
+        }}
+      >
+        {item.name}
+      </MDBBtn>
+    ))}
+  </div>
   );
 }

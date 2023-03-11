@@ -7,12 +7,6 @@ db.once('open', async () => {
         { name: 'Living Room' },
         { name: 'Dinning Room' },
         { name: 'Bedroom' },
-        { name: 'Modern' },
-        { name: 'Traditional' },
-        { name: 'Rustic' },
-        { name: 'Chair' },
-        { name: 'Table' },
-        { name: 'Lamp' }
     ]);
 
     console.log('categories Seeded');
@@ -21,27 +15,30 @@ db.once('open', async () => {
         {
             name: 'Living Room chair',
             description: 'A chair for your living room',
-            price: 50,
+            image: "https://source.unsplash.com/AAy5l4-oFuw",
+            price: 50.00,
             quantity: 20,
-            categories: [categories[0]._id, categories[3]._id, categories[6]._id]
+            category: categories[0]._id
                 
         
         },
         {
             name: 'Dinning Room Table',
             description: 'A table for your dinning room',
-            price: 75,
+            image: "https://source.unsplash.com/AAy5l4-oFuw",
+            price: 75.00,
             quantity: 30,
-            categories: [categories[1]._id, categories[4]._id, categories[7]._id]
+            category: categories[1]._id
                 
             
         },
         {
             name: 'Bedroom Lamp',
             description: 'A lamp for your bedroom',
-            price: 90,
+            image: "https://source.unsplash.com/AAy5l4-oFuw",
+            price: 90.00,
             quantity: 35,
-            categories: [categories[2]._id, categories[5]._id, categories[8]._id]
+            category: categories[2]._id
                 
             
         }
