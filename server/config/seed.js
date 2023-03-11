@@ -4,15 +4,15 @@ const { Category, Product, User, Order } = require('../models');
 db.once('open', async () => {
     await Category.deleteMany(), Product.deleteMany(), User.deleteMany(), Order.deleteMany();
     const categories = await Category.create([
-        { attribute: 'Living Room' },
-        { attribute: 'Dinning Room' },
-        { attribute: 'Bedroom' },
-        { attribute: 'Modern' },
-        { attribute: 'Traditional' },
-        { attribute: 'Rustic' },
-        { attribute: 'Chair' },
-        { attribute: 'Table' },
-        { attribute: 'Lamp' }
+        { name: 'Living Room' },
+        { name: 'Dinning Room' },
+        { name: 'Bedroom' },
+        { name: 'Modern' },
+        { name: 'Traditional' },
+        { name: 'Rustic' },
+        { name: 'Chair' },
+        { name: 'Table' },
+        { name: 'Lamp' }
     ]);
 
     console.log('categories Seeded');

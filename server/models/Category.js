@@ -2,7 +2,7 @@ const mongoose = require('mongoose');
 const { Schema } = mongoose;
 
 const categorySchema = new Schema ({
-    attribute: {
+    name: {
         type: String,
         required: true,
         trim: true
