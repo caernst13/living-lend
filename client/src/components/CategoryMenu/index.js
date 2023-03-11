@@ -50,6 +50,7 @@ export default function CategoryMenu() {
     {categories.map((item) => (
       <MDBBtn className = "m-2"color='light'
         key={item._id}
+        item={item}
         onClick={() => {
           handleClick(item._id);
         }}

@@ -3,15 +3,8 @@ import { useStoreContext } from "../../utils/GlobalState";
 import { REMOVE_FROM_CART, UPDATE_CART_QUANTITY } from "../../utils/actions";
 import { idbPromise } from "../../utils/helpers";
 import {
-  MDBBtn,
-  MDBCard,
-  MDBCardBody,
   MDBCardImage,
-  MDBCol,
-  MDBContainer,
   MDBIcon,
-  MDBInput,
-  MDBRow,
   MDBTypography,
 } from "mdb-react-ui-kit";
 
@@ -49,7 +42,7 @@ const CartItem = ({ item }) => {
   }
 
   return (
-    <div key={item._id} className="d-flex align-items-center mb-5">
+    <div key={item._id} item={item} className="d-flex align-items-center mb-5">
                       <div className="flex-shrink-0">
                         <MDBCardImage
                           src={`${item.image}`}
