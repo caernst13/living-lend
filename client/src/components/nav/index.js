@@ -11,16 +11,15 @@ import {
   MDBCollapse,
   MDBBadge
 } from 'mdb-react-ui-kit';
-// this is to prevent errors. We will need to add logic to the Nav for login
-//true represents a logged in user
-// false is logged out.
-const auth = false
+//importing auth. Display a different nav bar if user is logged in.
+import Auth from "../../utils/auth";
 
 export default function Nav() {
+  
     const [showNavSecond, setShowNavSecond] = useState(false);
-  // function 
+  // function to show nav based on user being logged in or not
     function showNavigation() {
-      if (auth) {
+      if (Auth.loggedIn()) {
         return (
           <MDBNavbar expand='lg' light bgColor='light'>
             <MDBContainer fluid>
