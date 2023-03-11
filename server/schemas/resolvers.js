@@ -15,13 +15,20 @@ const resolvers = {
     },
   },
   Mutation: {
+    //Mutation to add a user. Works with the sign up form. 
     addUser: async (parent, args) => {
       const user = await User.create(args);
       const token = signToken(user);
 
       return { token, user };
-    }
-  },
+    },
+    login: async (parent, { email, password }) => {
+      const user = await User.findOne({ email });
 
+      if (!user) {
+        throw new AuthenticationError('Incorrect credentials');
+      }
+    },
+  }
 }
   module.exports = resolvers;
