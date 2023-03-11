@@ -1,5 +1,6 @@
 import react from 'react'
 import { MDBBtn } from 'mdb-react-ui-kit'
+import Cart from '../components/Cart'
 export default function NotFound() {
     return (
         <div className="container d-flex flex-column align-items-center justify-content-center" style={{ height: "100vh" }}>
@@ -17,7 +18,8 @@ export default function NotFound() {
                     href='/products'
                   >
                     Products
-                  </MDBBtn>
+        </MDBBtn>
+        <Cart/>
     </div>
     )
 

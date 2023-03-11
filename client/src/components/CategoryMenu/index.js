@@ -46,9 +46,8 @@ export default function CategoryMenu() {
   };
   return (
     <div>
-    <h2>Choose a Room</h2>
     {categories.map((item) => (
-      <MDBBtn color='dark'
+      <MDBBtn className = "m-2"color='light'
         key={item._id}
         onClick={() => {
           handleClick(item._id);
