@@ -6,18 +6,22 @@ const typeDefs = gql`
     attribute: String!
   }
 
-  type Prduct {
+  type Product {
     _id: ID!
     name: String!
     description: String
-    price: Number!
-    quantity: Number
-    catagories: [Category]
+    price: Float!
+    quantity: Float
+    categories: [Category]
+  }
+
+  type Query {
+    products: [Product]!
   }
 
   type Order {
     _id: ID!
-    purchaseDate: Date
+    purchaseDate: String
     products: [Product]
   }
 
