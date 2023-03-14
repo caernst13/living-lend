@@ -23,7 +23,7 @@ db.once('open', async () => {
         
         },
         {
-            name: 'Dinning Room Table',
+            name: 'Dining Room Table',
             description: 'This elegant and functional dining table is perfect for hosting family dinners or entertaining guests. It is made of solid wood and features a beautiful natural finish. The table can comfortably seat six people and comes with matching chairs sold separately. The simple and sleek design will add a touch of sophistication to any dining room. Dimensions: 30" H x 60" W x 36" D',
             image: "https://loremflickr.com/320/240/woodtable",
             price: 75.00,
@@ -101,7 +101,11 @@ db.once('open', async () => {
             lastName: 'doe',
             email: 'john@doe.com',
             password: 'johndoe1',
-            orders: [products[0]._id, products[1]._id, products[2]._id,] 
+            orders: [
+                {
+                  products: [products[0]._id, products[0]._id, products[1]._id]
+                }
+              ]
             
         },
         {
@@ -109,7 +113,11 @@ db.once('open', async () => {
             lastName: 'doe',
             email: 'jane@doe.com',
             password: 'janedoe1',
-            orders: [products[0]._id, products[2]._id, products[2]._id,] 
+            orders: [
+                {
+                  products: [products[0]._id, products[0]._id, products[1]._id]
+                }
+              ]
             
         }
     ]);
