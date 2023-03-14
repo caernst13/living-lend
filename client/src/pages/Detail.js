@@ -147,13 +147,13 @@ function Detail() {
                                             Return to Products
                                         </a>
                                     <div className="d-flex justify-content-end align-items-center pb-2 mb-4">
-                                        <MDBBtn color="success" onClick={addToCart}><i class="fa-solid fa-cart-plus"></i></MDBBtn>
+                                        <MDBBtn color="success" onClick={addToCart}><i className="fa-solid fa-cart-plus"></i></MDBBtn>
                                         <MDBBtn
                                         color='danger'
                                         disabled={!cart.find((p) => p._id === currentProduct._id)}
                                         onClick={removeFromCart}
                                         >
-                                        <i class="fa-solid fa-trash"></i>
+                                        <i className="fa-solid fa-trash"></i>
                                         </MDBBtn>
                                     </div>
                                 </MDBCardBody>
