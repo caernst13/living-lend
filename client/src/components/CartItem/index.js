@@ -7,9 +7,9 @@ import {
   MDBIcon,
   MDBTypography,
 } from "mdb-react-ui-kit";
-
 const CartItem = ({ item }) => {
-
+  
+  console.log(item.purchaseQuantity)
   const [, dispatch] = useStoreContext();
 
   const removeFromCart = item => {

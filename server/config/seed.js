@@ -1,5 +1,5 @@
 const db = require('./connection');
-const { Category, Product, User, Order } = require('../models');
+const { Category, Product, User, } = require('../models');
 
 db.once('open', async () => {
     await db.dropDatabase();
@@ -19,7 +19,7 @@ db.once('open', async () => {
             price: 50.00,
             quantity: 20,
             category: categories[0]._id
-                
+              
         
         },
         {
@@ -103,9 +103,9 @@ db.once('open', async () => {
             password: 'johndoe1',
             orders: [
                 {
-                  products: [products[0]._id, products[0]._id, products[1]._id]
+                    products: [products[0].id, products[3].id, products[5].id]
                 }
-              ]
+            ] 
             
         },
         {
@@ -115,9 +115,9 @@ db.once('open', async () => {
             password: 'janedoe1',
             orders: [
                 {
-                  products: [products[0]._id, products[0]._id, products[1]._id]
+                    products: [products[0].id, products[3].id, products[5].id]
                 }
-              ]
+            ] 
             
         }
     ]);

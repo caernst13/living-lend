@@ -81,7 +81,7 @@ const Cart = () => {
     
 
   return (
-    <section onMouseLeave={() => {toggleCart()}} className="cart h-100 h-custom" style={{ backgroundColor: "#eee" }}>
+    <section className="cart h-100 h-custom" style={{ backgroundColor: "#eee" }}>
       <MDBContainer className="h-100 py-5">
         <MDBRow className="justify-content-center align-items-center h-100">
           <MDBCol>
@@ -95,10 +95,10 @@ const Cart = () => {
                     >
                       Your Cart
                     </MDBTypography>
-                    {state.cart.map((item) => (
-                    <CartItem key={item._id} item={item} />
+                    {state.cart.map((item, index) => (
+                    <CartItem key={`${index}:${item}`}
+                    item={item} />
                     ))}
-
 
                     <hr
                       className="mb-4"
