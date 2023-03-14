@@ -95,8 +95,9 @@ const Cart = () => {
                     >
                       Your Cart
                     </MDBTypography>
-                    {state.cart.map((item) => (
-                    <CartItem key={item._id} item={item} />
+                    {state.cart.map((item, index) => (
+                    <CartItem key={`${index}:${item}`}
+                    item={item} />
                     ))}
 
 

@@ -2,6 +2,7 @@ const { AuthenticationError } = require('apollo-server-express');
 const { User, Product, Category, Order } = require('../models');
 const { signToken } = require('../utils/auth');
 const stripe = require('stripe')('sk_test_4eC39HqLyjWDarjtT1zdp7dc');
+const { adminAuthMiddleware } = require('../utils/auth');
 
 const resolvers = {
   Query: {
@@ -89,7 +90,7 @@ const resolvers = {
         payment_method_types: ['card'],
         line_items,
         mode: 'payment',
-        success_url: `${url}/success?session_id={CHECKOUT_SESSION_ID}`,
+        success_url: `${url}/success`,
         cancel_url: `${url}/`
       });
 
@@ -143,7 +144,21 @@ const resolvers = {
       const token = signToken(user);
 
       return { token, user };
-    }
+    },
+    addProduct: async (parent, args, context) => {
+      await adminAuthMiddleware(context.req, context.res, context.next);
+      
+      const product = await Product.create(args);
+  
+      return product;
+    },
+      deleteProduct: async (parent, { _id }, context) => {
+        await adminAuthMiddleware(context.req, context.res, context.next);
+        
+        const deletedProduct = await Product.findByIdAndDelete(_id);
+  
+        return deletedProduct;
+      },
   }
 };
   module.exports = resolvers;

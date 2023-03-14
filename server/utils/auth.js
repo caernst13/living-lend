@@ -28,9 +28,17 @@ module.exports = {
 
     return req;
   },
-  signToken: function ({ firstName, email, _id }) {
-    const payload = { firstName, email, _id };
 
+  adminAuthMiddleware: function (req, res, next) {
+    if (!req.user || !req.user.isAdmin) {
+      return res.status(401).send('Unauthorized');
+    }
+    next();
+  },
+  signToken: function ({ firstName, email, _id, isAdmin }) {
+    const payload = { firstName, email, _id, isAdmin };
     return jwt.sign({ data: payload }, secret, { expiresIn: expiration });
   },
+
+  
 };
