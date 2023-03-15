@@ -6,6 +6,16 @@ import { QUERY_PRODUCTS } from '../../utils/queries';
 import { UPDATE_PRODUCTS } from '../../utils/actions';
 import { useStoreContext } from '../../utils/GlobalState';
 import {Tooltip} from 'react-tooltip';
+import {
+  Box,
+  chakra,
+  Flex,
+  SimpleGrid,
+  Stat,
+  StatLabel,
+  StatNumber,
+  useColorModeValue,
+} from '@chakra-ui/react';
 
 export default function AdminProductList() {
   const [state, dispatch] = useStoreContext();
@@ -14,13 +24,29 @@ export default function AdminProductList() {
 
   const { loading, data } = useQuery(QUERY_PRODUCTS);
 
-  function handleDelete(productId) {
-    // Remove the product from the state
-    const updatedProducts = state.products.filter((product) => product._id !== productId);
-    dispatch({
-      type: UPDATE_PRODUCTS,
-      products: updatedProducts,
+  // function handleDelete(productId) {
+  //   // Remove the product from the state
+  //   const updatedProducts = state.products.filter((product) => product._id !== productId);
+  //   dispatch({
+  //     type: UPDATE_PRODUCTS,
+  //     products: updatedProducts,
+  //   });
+
+  function getTotalItems() {
+    let totalItems = 0;
+    state.products.forEach((product) => {
+      totalItems += product.quantity;
     });
+    return totalItems;
+  }
+
+  function getTotalValue() {
+    let totalValue = 0;
+    state.products.forEach((product) => {
+      totalValue += product.quantity * product.price;
+    });
+    return totalValue;
+  }
 
   useEffect(() => {
     if (data) {
@@ -54,19 +80,19 @@ export default function AdminProductList() {
 
   return (
     <>
-      <MDBContainer className="my-3 border p-2">
+      <MDBContainer className="my-3 border p-2 overflow-x-auto">
         <div className="d-flex justify-content-between">
         <h2>Product List</h2>
-        <MDBBtn rounded size='sm' color="success">
-                    Add Product
+        <MDBBtn rounded size='l' color="success">
+        <MDBIcon fas icon="plus-square" /> Add New Product
                   </MDBBtn>
         </div>
-      <MDBTable hover small align='top'>
+      <p className="text-center text-muted m-3">Our inventory currently consists of {state.products.length} unique products, totaling {getTotalItems()} items in stock and a combined value of ${getTotalValue()} </p>
+      <MDBTable hover small align='top' className="my-3">
         <MDBTableHead>
           <tr>
             <th scope='col'>Name</th>
             <th scope='col'>Description</th>
-            <th scope='col'>Status</th>
             <th scope='col'>Price</th>
             <th scope='col'>Actions</th>
           </tr>
@@ -95,18 +121,13 @@ export default function AdminProductList() {
                     className='text-muted mb-0'
                   
                   >
-                    {product.description.slice(0, 30)}...
+                    {product.description.slice(0, 50)}...
                   </p>
                   
                 </td>
-                <td>
-                  <MDBBadge color='success' pill>
-                    Active
-                  </MDBBadge>
-                </td>
                 <td>${product.price}</td>
-                <td>
-                  <MDBBtn color='warning' rounded size='sm'>
+                <td >
+                  <MDBBtn color='warning' rounded size='sm'className="m-1">
                   <MDBIcon fas icon="pencil-alt" />
                   </MDBBtn>
                   <MDBBtn color='danger' rounded size='sm' onClick={() => handleDelete(product._id)}>
