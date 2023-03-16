@@ -8,6 +8,8 @@ import Login from "./pages/Login"
 import Signup from "./pages/Signup"
 import NotFound from "./pages/NotFound"
 import Detail from './pages/Detail';
+import Success from './pages/Success';
+import Dashboard from './pages/Dashboard';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import {
   ApolloClient,
@@ -67,6 +69,14 @@ function App() {
             <Route 
                 path="/products/:id" 
                 element={<Detail />} 
+              />
+            <Route 
+                path="/success" 
+                element={<Success/>} 
+              />
+            <Route 
+                path="/dashboard" 
+                element={<Dashboard />} 
               />
             <Route 
               path="*" 

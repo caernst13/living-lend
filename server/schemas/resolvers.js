@@ -152,13 +152,13 @@ const resolvers = {
   
       return product;
     },
-      deleteProduct: async (parent, { _id }, context) => {
-        await adminAuthMiddleware(context.req, context.res, context.next);
-        
-        const deletedProduct = await Product.findByIdAndDelete(_id);
-  
-        return deletedProduct;
-      },
+    deleteProduct: async (parent, { _id }, context) => {
+      await adminAuthMiddleware(context.req, context.res, context.next);
+      
+      const deletedProduct = await Product.findByIdAndDelete(_id);
+    
+      return deletedProduct;
+    },
   }
 };
   module.exports = resolvers;
