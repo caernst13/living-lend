@@ -1,21 +1,11 @@
 import React, { useEffect } from 'react';
 import { MDBBadge, MDBBtn, MDBTable, MDBTableBody, MDBTableHead, MDBContainer, MDBIcon } from 'mdb-react-ui-kit';
-import { useQuery } from '@apollo/client';
+import { useQuery, useMutation } from '@apollo/client';
 import { idbPromise } from '../../utils/helpers';
 import { QUERY_PRODUCTS } from '../../utils/queries';
 import { UPDATE_PRODUCTS } from '../../utils/actions';
 import { useStoreContext } from '../../utils/GlobalState';
-import {Tooltip} from 'react-tooltip';
-import {
-  Box,
-  chakra,
-  Flex,
-  SimpleGrid,
-  Stat,
-  StatLabel,
-  StatNumber,
-  useColorModeValue,
-} from '@chakra-ui/react';
+import { DELETE_PRODUCT } from '../../utils/mutations';
 
 export default function AdminProductList() {
   const [state, dispatch] = useStoreContext();
@@ -24,13 +14,35 @@ export default function AdminProductList() {
 
   const { loading, data } = useQuery(QUERY_PRODUCTS);
 
-  // function handleDelete(productId) {
-  //   // Remove the product from the state
-  //   const updatedProducts = state.products.filter((product) => product._id !== productId);
-  //   dispatch({
-  //     type: UPDATE_PRODUCTS,
-  //     products: updatedProducts,
-  //   });
+  const [deleteProduct, { error }] = useMutation(DELETE_PRODUCT, {
+    context: {
+      fetchOptions: {
+        method: 'DELETE'
+      }
+    }
+  });
+
+  function handleDelete(productId) {
+    console.log(productId); 
+    deleteProduct({
+      variables: { productId },
+    })
+      .then((response) => {
+        console.log(response.data.deleteProduct);
+        const updatedProducts = state.products.filter(
+          (product) => product._id !== productId
+        );
+  
+        dispatch({
+          type: UPDATE_PRODUCTS,
+          products: updatedProducts,
+        });
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  }
+
 
   function getTotalItems() {
     let totalItems = 0;
@@ -80,7 +92,7 @@ export default function AdminProductList() {
 
   return (
     <>
-      <MDBContainer className="my-3 border p-2 overflow-x-auto">
+      <MDBContainer className="my-3 p-2 ">
         <div className="d-flex justify-content-between">
         <h2>Product List</h2>
         <MDBBtn rounded size='l' color="success">
@@ -100,7 +112,7 @@ export default function AdminProductList() {
         <MDBTableBody>
           {state.products.length ? (
             filterProducts().map((product) => (
-              <tr key={product._id}>
+              <tr  key={product._id}>
                 <td className = "pr-0 mr-0">
                   <div className='d-flex align-items-center'>
                     <img

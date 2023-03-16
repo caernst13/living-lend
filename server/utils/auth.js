@@ -29,11 +29,12 @@ module.exports = {
     return req;
   },
 
-  adminAuthMiddleware: function (req, res, next) {
-    if (!req.user || !req.user.isAdmin) {
-      return res.status(401).send('Unauthorized');
+  adminAuthMiddleware: function (context) {
+    console.log("USER:" + context.req.user)
+    console.log("isAdmin:" + context.req.user.isAdmin)
+    if (!context.req.user || !context.req.user.isAdmin) {
+      throw new AuthenticationError('Unauthorized');
     }
-    next();
   },
   signToken: function ({ firstName, email, _id, isAdmin }) {
     const payload = { firstName, email, _id, isAdmin };
