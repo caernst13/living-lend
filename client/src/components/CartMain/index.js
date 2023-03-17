@@ -4,9 +4,8 @@ import { useLazyQuery } from '@apollo/client';
 import { QUERY_CHECKOUT } from '../../utils/queries';
 import { idbPromise } from '../../utils/helpers';
 import CartItem from '../CartItem';
-import Auth from '../../utils/auth';
 import { useStoreContext } from '../../utils/GlobalState';
-import { TOGGLE_CART, ADD_MULTIPLE_TO_CART } from '../../utils/actions';
+import { ADD_MULTIPLE_TO_CART } from '../../utils/actions';
 // import './style.css';
 import {
   MDBBtn,
@@ -68,6 +67,12 @@ const Cart = () => {
     getCheckout({
       variables: { products: productIds },
     });
+
+    function calculateFinal() {
+        return 0
+    }
+
+    
   }
     
 
@@ -114,7 +119,48 @@ const Cart = () => {
                       tag="h5"
                       className="mb-5 pt-2 text-center"
                     >
-                      Your Cart
+                        <form>
+                        <div>Number of months you would like to rent:</div>
+                        <input type="number" id="typeNumber" min='1' value ={this.value} onChange={this.calculateFinal}/>
+                        </form>
+        <form
+          className="flex-row justify-center justify-space-between-md align-center"
+          onSubmit={getCheckout}
+        >   
+          <div>Country/Region:</div>
+          <input className="form-input"/>
+          
+          <div>Address:</div>
+          <input className="form-input"
+            placeholder="street address or P.O. Box..."/>
+            <div></div>
+          <input className="form-input"
+            placeholder="Apt, Suitte, unit, building, floor, etc."/>
+          
+                <div class="container">
+  <div className="row">
+    <div className="col-md">
+    <div>City:</div>
+          <input className="form-input"/>
+    </div>
+    <div className="col-md">
+    <div>State:</div>
+          <input className="form-input"/>
+    </div>
+    <div className="col-md">
+    <div>ZIP Code:</div>
+          <input className="form-input"/>
+    </div>
+  </div>
+</div>
+
+
+          <div>
+            <button className="btn btn-info btn-block py-3" type="submit">
+              Move to Payment
+            </button>
+          </div>
+        </form>
                     </MDBTypography>
                   </MDBCol>
 
