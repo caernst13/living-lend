@@ -7,7 +7,7 @@ import CartItem from '../CartItem';
 import Auth from '../../utils/auth';
 import { useStoreContext } from '../../utils/GlobalState';
 import { TOGGLE_CART, ADD_MULTIPLE_TO_CART } from '../../utils/actions';
-import './style.css';
+// import './style.css';
 import {
   MDBBtn,
   MDBCard,
@@ -19,6 +19,7 @@ import {
   MDBInput,
   MDBRow,
   MDBTypography,
+  MDBNavbarLink
 } from "mdb-react-ui-kit";
 
 const stripePromise = loadStripe('pk_test_TYooMQauvdEDq54NiTphI7jx');
@@ -46,9 +47,6 @@ const Cart = () => {
     }
   }, [state.cart.length, dispatch]);
 
-  function toggleCart() {
-    dispatch({ type: TOGGLE_CART });
-  }
 
   function calculateTotal() {
     let sum = 0;
@@ -71,17 +69,10 @@ const Cart = () => {
       variables: { products: productIds },
     });
   }
-
-  if (!state.cartOpen) {
-    return (
-      <div className="cart-closed" onClick={toggleCart}>
-      </div>
-    );
-  }
     
 
   return (
-    <section className="cart h-100 h-custom" style={{ backgroundColor: "#eee" }}>
+    <section>
       <MDBContainer className="h-100 py-5">
         <MDBRow className="justify-content-center align-items-center h-100">
           <MDBCol>
@@ -113,22 +104,20 @@ const Cart = () => {
                       style={{ backgroundColor: "#e1f5fe" }}
                     >
                       <MDBTypography tag="h5" className="fw-bold mb-0">
-                        Total:
+                        Total Per Month:
                       </MDBTypography>
                       <MDBTypography tag="h5" className="fw-bold mb-0">
                         ${calculateTotal()}
                       </MDBTypography>
                     </div>
+                    <MDBTypography
+                      tag="h5"
+                      className="mb-5 pt-2 text-center"
+                    >
+                      Your Cart
+                    </MDBTypography>
                   </MDBCol>
-                    {Auth.loggedIn() ? (
-                      <MDBBtn color = "warning" onClick={submitCheckout}>Checkout</MDBBtn>
-                    ) : (
-                      <span>(log in to check out)</span>
-                    )} 
-                        <a href="">
-                          <MDBIcon onClick={toggleCart} fas icon="angle-left me-2" />
-                          Back to shopping
-                        </a>
+
                 </MDBRow>
               </MDBCardBody>
             </MDBCard>
