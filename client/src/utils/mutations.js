@@ -51,9 +51,10 @@ export const ADD_USER = gql`
   }
 `;
 
+
 export const DELETE_PRODUCT = gql`
-  mutation deleteProduct($productId: ID!) {
-    deleteProduct(productId: $productId) {
+  mutation deleteProduct($_id: ID!) {
+    deleteProduct(_id: $_id) {
       _id
     }
   }

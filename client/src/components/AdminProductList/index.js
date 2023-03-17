@@ -14,33 +14,30 @@ export default function AdminProductList() {
 
   const { loading, data } = useQuery(QUERY_PRODUCTS);
 
-  const [deleteProduct, { error }] = useMutation(DELETE_PRODUCT, {
-    context: {
-      fetchOptions: {
-        method: 'DELETE'
-      }
-    }
-  });
+  const [deleteProduct, { error }] = useMutation(DELETE_PRODUCT);
 
-  function handleDelete(productId) {
-    console.log(productId); 
-    deleteProduct({
-      variables: { productId },
-    })
-      .then((response) => {
-        console.log(response.data.deleteProduct);
-        const updatedProducts = state.products.filter(
-          (product) => product._id !== productId
-        );
-  
-        dispatch({
-          type: UPDATE_PRODUCTS,
-          products: updatedProducts,
-        });
+//delete
+  function handleDelete(_id) {
+    // Show a confirmation dialog before deleting the product
+    if (window.confirm('Are you sure you want to delete this product?')) {
+      deleteProduct({
+        variables: { _id },
       })
-      .catch((error) => {
-        console.log(error);
-      });
+        .then((response) => {
+          console.log(response.data.deleteProduct);
+          const updatedProducts = state.products.filter(
+            (product) => product._id !== _id
+          );
+  
+          dispatch({
+            type: UPDATE_PRODUCTS,
+            products: updatedProducts,
+          });
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+    }
   }
 
 
