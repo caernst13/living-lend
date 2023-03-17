@@ -109,6 +109,18 @@ db.once('open', async () => {
             
         },
         {
+            firstName: 'Admin',
+            lastName: 'admin',
+            email: 'admin@admin.com',
+            password: 'Password1!',
+            orders: [
+                {
+                    products: [products[0].id, products[3].id, products[5].id]
+                }
+            ],
+            isAdmin: true
+        },
+        {
             firstName: 'Jane',
             lastName: 'doe',
             email: 'jane@doe.com',
