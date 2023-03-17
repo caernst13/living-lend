@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { loadStripe } from '@stripe/stripe-js';
 import { useLazyQuery } from '@apollo/client';
 import { QUERY_CHECKOUT } from '../../utils/queries';
@@ -11,14 +11,11 @@ import {
   MDBBtn,
   MDBCard,
   MDBCardBody,
-  MDBCardImage,
   MDBCol,
   MDBContainer,
-  MDBIcon,
-  MDBInput,
   MDBRow,
   MDBTypography,
-  MDBNavbarLink
+  MDBBtnGroup
 } from "mdb-react-ui-kit";
 
 const stripePromise = loadStripe('pk_test_TYooMQauvdEDq54NiTphI7jx');
@@ -26,6 +23,7 @@ const stripePromise = loadStripe('pk_test_TYooMQauvdEDq54NiTphI7jx');
 const Cart = () => {
   const [state, dispatch] = useStoreContext();
   const [getCheckout, { data }] = useLazyQuery(QUERY_CHECKOUT);
+  var sum = 0;
 
   useEffect(() => {
     if (data) {
@@ -48,7 +46,6 @@ const Cart = () => {
 
 
   function calculateTotal() {
-    let sum = 0;
     state.cart.forEach((item) => {
       sum += item.price * item.purchaseQuantity;
     });
@@ -68,13 +65,17 @@ const Cart = () => {
       variables: { products: productIds },
     });
 
-    function calculateFinal() {
-        return 0
-    }
+    
+    
+}
 
-    
-  }
-    
+const [orderTotal, setOrderTotal]  = useState(NaN);
+const handleInputChange = (e) => {
+        const { value } = e.target;
+        return setOrderTotal(value*sum)
+
+}
+
 
   return (
     <section>
@@ -119,13 +120,44 @@ const Cart = () => {
                       tag="h5"
                       className="mb-5 pt-2 text-center"
                     >
-                        <form>
-                        <div>Number of months you would like to rent:</div>
-                        <input type="number" id="typeNumber" min='1' value ={this.value} onChange={this.calculateFinal}/>
+                        <hr
+                      className="mb-4"
+                      style={{
+                        height: "2px",
+                        backgroundColor: "#1266f1",
+                        opacity: 1,
+                      }}
+                    />
+                        <div>How many months would you like to rent your furniture?</div>
+                        <form className='form'>
+                        <div class="form-outline">
+                        <input type="number" id="typeNumber" min="1" max="12" class="form-control" onChange={handleInputChange}/>
+                        </div>
+
                         </form>
+                        <p></p>
+                        <div
+                      className="d-flex justify-content-between p-2 mb-2"
+                      style={{ backgroundColor: "#e1f5fe" }}
+                    >
+                      <MDBTypography tag="h5" className="fw-bold mb-0">
+                        Order Total:
+                      </MDBTypography>
+                      <MDBTypography tag="h5" className="fw-bold mb-0">
+                        ${orderTotal}
+                      </MDBTypography>
+                    </div>
+                    <hr
+                      className="mb-4"
+                      style={{
+                        height: "2px",
+                        backgroundColor: "#1266f1",
+                        opacity: 1,
+                      }}
+                    />
+                    <p id='test'></p>
         <form
           className="flex-row justify-center justify-space-between-md align-center"
-          onSubmit={getCheckout}
         >   
           <div>Country/Region:</div>
           <input className="form-input"/>
@@ -155,12 +187,9 @@ const Cart = () => {
 </div>
 
 
-          <div>
-            <button className="btn btn-info btn-block py-3" type="submit">
-              Move to Payment
-            </button>
-          </div>
         </form>
+        <MDBBtn color = "warning" onClick={submitCheckout}>Checkout</MDBBtn>
+
                     </MDBTypography>
                   </MDBCol>
 
