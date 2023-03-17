@@ -16,7 +16,7 @@ export default function AdminProductList() {
 
   const [deleteProduct, { error }] = useMutation(DELETE_PRODUCT);
 
-
+//delete
   function handleDelete(_id) {
     // Show a confirmation dialog before deleting the product
     if (window.confirm('Are you sure you want to delete this product?')) {
