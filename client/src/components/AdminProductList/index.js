@@ -1,13 +1,21 @@
-import React, { useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import { MDBBadge, MDBBtn, MDBTable, MDBTableBody, MDBTableHead, MDBContainer, MDBIcon } from 'mdb-react-ui-kit';
 import { useQuery, useMutation } from '@apollo/client';
 import { idbPromise } from '../../utils/helpers';
 import { QUERY_PRODUCTS } from '../../utils/queries';
 import { UPDATE_PRODUCTS } from '../../utils/actions';
 import { useStoreContext } from '../../utils/GlobalState';
-import { DELETE_PRODUCT } from '../../utils/mutations';
+import { DELETE_PRODUCT, ADD_PRODUCT } from '../../utils/mutations';
+import AddProductModal from '../AddProductModal'
+
 
 export default function AdminProductList() {
+
+
+//Modal state for adding a product
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [addProductMutation, { error: addProductError }] = useMutation(ADD_PRODUCT);
+
   const [state, dispatch] = useStoreContext();
 
   const { currentCategory } = state;
@@ -39,7 +47,29 @@ export default function AdminProductList() {
         });
     }
   }
-
+  const handleAddProduct = (newProduct) => {
+    addProductMutation({
+      variables: {
+        name: newProduct.name,
+        description: newProduct.description,
+        image: newProduct.image,
+        price: parseFloat(newProduct.price),
+        quantity: parseInt(newProduct.quantity),
+        category: newProduct.category,
+      },
+    })
+      .then(({ data }) => {
+        console.log('Product added:', data.addProduct);
+        dispatch({
+          type: UPDATE_PRODUCTS,
+          products: [...state.products, data.addProduct],
+        });
+      })
+      .catch((error) => {
+        console.error('Error adding product:', error);
+      });
+  };
+  
 
   function getTotalItems() {
     let totalItems = 0;
@@ -90,11 +120,17 @@ export default function AdminProductList() {
   return (
     <>
       <MDBContainer className="my-3 p-2 ">
+        
         <div className="d-flex justify-content-between">
         <h2>Product List</h2>
-        <MDBBtn rounded size='l' color="success">
+        <MDBBtn rounded size='l' color="success" onClick={() => setIsModalOpen(true)}>
         <MDBIcon fas icon="plus-square" /> Add New Product
-                  </MDBBtn>
+          </MDBBtn>
+          <AddProductModal
+  isOpen={isModalOpen}
+  onClose={() => setIsModalOpen(false)}
+  onAddProduct={handleAddProduct}
+/>
         </div>
       <p className="text-center text-muted m-3">Our inventory currently consists of {state.products.length} unique products, totaling {getTotalItems()} items in stock and a combined value of ${getTotalValue()} </p>
       <MDBTable hover small align='top' className="my-3">

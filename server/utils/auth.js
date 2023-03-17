@@ -1,3 +1,5 @@
+const { AuthenticationError } = require('apollo-server-express');
+
 const jwt = require('jsonwebtoken');
 
 

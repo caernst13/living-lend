@@ -145,13 +145,25 @@ const resolvers = {
 
       return { token, user };
     },
-    addProduct: async (parent, args, context) => {
-      await adminAuthMiddleware(context);
-      
-      const product = await Product.create(args);
-  
-      return product;
-    },
+   addProduct: async (parent, args, context) => {
+    await adminAuthMiddleware(context);
+
+    // Find the category by name
+    const category = await Category.findOne({ name: args.category });
+
+    // Check if the category exists
+    if (!category) {
+      throw new Error('Category not found');
+    }
+
+    // Replace the category name with its ObjectId
+    args.category = category._id;
+
+    // Create the product
+    const product = await Product.create(args);
+
+    return product;
+  },
     deleteProduct: async (parent, { _id }, context) => {
       await adminAuthMiddleware(context);
       
