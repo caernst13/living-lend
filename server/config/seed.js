@@ -5,7 +5,7 @@ db.once('open', async () => {
     await db.dropDatabase();
     const categories = await Category.create([
         { name: 'Living Room' },
-        { name: 'Dinning Room' },
+        { name: 'Dining Room' },
         { name: 'Bedroom' },
     ]);
 
