@@ -146,14 +146,14 @@ const resolvers = {
       return { token, user };
     },
     addProduct: async (parent, args, context) => {
-      await adminAuthMiddleware(context.req, context.res, context.next);
+      await adminAuthMiddleware(context);
       
       const product = await Product.create(args);
   
       return product;
     },
     deleteProduct: async (parent, { _id }, context) => {
-      await adminAuthMiddleware(context.req, context.res, context.next);
+      await adminAuthMiddleware(context);
       
       const deletedProduct = await Product.findByIdAndDelete(_id);
     
