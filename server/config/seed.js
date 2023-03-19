@@ -2,7 +2,9 @@ const db = require('./connection');
 const { Category, Product, User, } = require('../models');
 
 db.once('open', async () => {
-    await db.dropDatabase();
+    await Category.deleteMany({});
+    await Product.deleteMany({});
+    await User.deleteMany({});
     const categories = await Category.create([
         { name: 'Living Room' },
         { name: 'Dining Room' },
