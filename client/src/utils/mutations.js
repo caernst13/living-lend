@@ -59,3 +59,34 @@ export const DELETE_PRODUCT = gql`
     }
   }
 `;
+
+export const ADD_PRODUCT = gql`
+  mutation AddProduct(
+    $name: String!
+    $description: String!
+    $image: String!
+    $price: Float!
+    $quantity: Int!
+    $category: ID!
+  ) {
+    addProduct(
+      name: $name
+      description: $description
+      image: $image
+      price: $price
+      quantity: $quantity
+      category: $category
+    ) {
+      _id
+      name
+      description
+      image
+      price
+      quantity
+      category {
+        _id
+        name
+      }
+    }
+  }
+`;
