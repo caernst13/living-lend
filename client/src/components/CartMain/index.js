@@ -6,7 +6,6 @@ import { idbPromise } from '../../utils/helpers';
 import CartItem from '../CartItem';
 import { useStoreContext } from '../../utils/GlobalState';
 import { ADD_MULTIPLE_TO_CART } from '../../utils/actions';
-// import './style.css';
 import {
   MDBBtn,
   MDBCard,
@@ -15,7 +14,6 @@ import {
   MDBContainer,
   MDBRow,
   MDBTypography,
-  MDBBtnGroup
 } from "mdb-react-ui-kit";
 
 const stripePromise = loadStripe('pk_test_TYooMQauvdEDq54NiTphI7jx');
@@ -65,15 +63,12 @@ const Cart = () => {
       variables: { products: productIds },
     });
 
-    
-    
 }
 
 const [orderTotal, setOrderTotal]  = useState(NaN);
 const handleInputChange = (e) => {
         const { value } = e.target;
         return setOrderTotal(value*sum)
-
 }
 
 
@@ -131,7 +126,7 @@ const handleInputChange = (e) => {
                         <div>How many months would you like to rent your furniture?</div>
                         <form className='form'>
                         <div class="form-outline">
-                        <input type="number" id="typeNumber" min="1" max="12" class="form-control" onChange={handleInputChange}/>
+                        <input type="number" id="typeNumber" defaultValue={1} min="1" max="12" class="form-control" onChange={handleInputChange}/>
                         </div>
 
                         </form>
@@ -188,6 +183,7 @@ const handleInputChange = (e) => {
 
 
         </form>
+        <p></p>
         <MDBBtn color = "warning" onClick={submitCheckout}>Checkout</MDBBtn>
 
                     </MDBTypography>
