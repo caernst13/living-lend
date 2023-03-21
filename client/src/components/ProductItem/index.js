@@ -69,7 +69,7 @@ function ProductItem(item) {
                     <MDBCardImage
                       src={`${image}`}
                 fluid
-                className="w-100"
+                style={{ width: '200px', height: '200px' } }    
               />
               <a href={`/products/${_id}`}>
                 <div

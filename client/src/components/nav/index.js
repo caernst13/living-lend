@@ -41,7 +41,7 @@ export default function Nav() {
     function showNavigation() {
       if (Auth.loggedIn()) {
         return (
-          <MDBNavbar expand='lg' light bgColor='light'>
+          <MDBNavbar expand='lg' light bgColor='light' className = "sticky-top" >
             <MDBContainer fluid>
               <MDBNavbarBrand href='/'>Living Lend</MDBNavbarBrand>
               <MDBNavbarToggler
