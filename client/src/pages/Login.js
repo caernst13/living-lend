@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import {MDBContainer, MDBCol, MDBRow, MDBBtn, MDBIcon, MDBInput, MDBCheckbox } from 'mdb-react-ui-kit';
 import { useMutation } from '@apollo/client';
 import { LOGIN } from '../utils/mutations';
-import Auth from '../utils/auth';
+import authMiddleware from '../utils/auth';
 
 export default function Login(props) {    
   const [formState, setFormState] = useState({ email: '', password: '' });
@@ -15,7 +15,7 @@ export default function Login(props) {
         variables: { email: formState.email, password: formState.password },
       });
       const token = mutationResponse.data.login.token;
-      Auth.login(token);
+      authMiddleware.login(token);
     } catch (e) {
       console.log(e);
     }
