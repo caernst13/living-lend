@@ -2,7 +2,7 @@ const { AuthenticationError } = require('apollo-server-express');
 const { User, Product, Category, Order } = require('../models');
 const { signToken } = require('../utils/auth');
 const stripe = require('stripe')('sk_test_4eC39HqLyjWDarjtT1zdp7dc');
-const { adminAuthMiddleware } = require('../utils/auth');
+const { authMiddleware } = require('../utils/auth');
 
 const resolvers = {
   Query: {
@@ -146,8 +146,8 @@ const resolvers = {
 
       return { token, user };
     },
-   addProduct: async (parent, args, context) => {
-    await adminAuthMiddleware(context);
+   addProduct: async (parent, args,) => {
+    ;
 
     // Find the category by name
     const category = await Category.findOne({ name: args.category });
@@ -165,9 +165,8 @@ const resolvers = {
 
     return product;
   },
-    deleteProduct: async (parent, { _id }, context) => {
-      await adminAuthMiddleware(context);
-      
+    deleteProduct: async (parent, { _id }) => {
+     
       const deletedProduct = await Product.findByIdAndDelete(_id);
     
       return deletedProduct;
