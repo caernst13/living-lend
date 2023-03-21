@@ -27,8 +27,9 @@ module.exports = {
     } catch {
       console.log('Invalid token');
     }
-  
-    return { req };
+    const user = req.user ? req.user : null;
+
+  return { req, user };
   },
 
   adminAuthMiddleware: function (context) {

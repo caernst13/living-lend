@@ -40,12 +40,12 @@ const resolvers = {
           path: 'orders.products',
           populate: 'category'
         });
-
+    
         user.orders.sort((a, b) => b.purchaseDate - a.purchaseDate);
-
+    
         return user;
       }
-
+    
       throw new AuthenticationError('Not logged in');
     },
     order: async (parent, { _id }, context) => {
