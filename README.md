@@ -17,7 +17,7 @@ There are no installation requirements at this time.
 
 ## Links
 Link to the deployed application
-https://shielded-mesa-50681.herokuapp.com/
+https://safe-falls-95758.herokuapp.com/
 ## Usage
 - To begin using Living Lend, simply visit our website and create an account.
 - Once you have an account, you can browse our inventory of furniture and select items to add to your cart.
