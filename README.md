@@ -13,7 +13,7 @@ Furthermore, by renting furniture, users can make a more sustainable choice. Ren
 * [Report Bugs](#bugreport)
 
 ## Installation
-There are no installation requirements.
+There are no installation requirements at this time.
 
 ## Links
 Link to the deployed application
